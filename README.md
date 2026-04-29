@@ -1,2 +1,0 @@
-# AdSwift
-Full Stack Website
