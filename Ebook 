@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Money Blueprint — Land Your First $500 AI Client in 14 Days</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ── Reset & Root ─────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#090909;
+  --card:#111111;
+  --card2:#161616;
+  --border:#1e1e1e;
+  --border2:#2a2a2a;
+  --accent:#00E5A0;
+  --gold:#FFD166;
+  --red:#FF4D4D;
+  --text:#E8E8E8;
+  --muted:#555;
+  --muted2:#888;
+  --white:#ffffff;
+  --mono:'DM Mono',monospace;
+  --display:'Bebas Neue',sans-serif;
+  --body:'Instrument Sans',sans-serif;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--body);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+/* Grain overlay */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;opacity:.4;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+
+/* ── Ticker ───────────────────────────────────────── */
+.ticker{
+  background:#000;
+  border-bottom:1px solid var(--border);
+  overflow:hidden;
+  height:36px;
+  display:flex;align-items:center;
+  position:sticky;top:0;z-index:100;
+}
+.ticker-track{
+  display:flex;gap:0;
+  animation:ticker 28s linear infinite;
+  white-space:nowrap;
+}
+.ticker-item{
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--muted2);
+  padding:0 32px;
+  border-right:1px solid var(--border);
+  height:36px;
+  display:flex;align-items:center;gap:8px;
+  flex-shrink:0;
+}
+.ticker-item span{color:var(--accent);font-weight:500}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── Nav ──────────────────────────────────────────── */
+.nav{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 48px;
+  border-bottom:1px solid var(--border);
+  background:rgba(9,9,9,.96);
+  backdrop-filter:blur(12px);
+}
+.nav-logo{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:.12em}
+.nav-cta{
+  background:var(--accent);color:#000;
+  font-family:var(--body);font-weight:700;font-size:13px;
+  padding:9px 20px;border-radius:4px;
+  border:none;cursor:pointer;
+  transition:all .2s;
+  text-decoration:none;display:inline-block;
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(0,229,160,.3)}
+
+/* ── Hero ─────────────────────────────────────────── */
+.hero{
+  padding:80px 48px 0;
+  max-width:1200px;margin:0 auto;
+  position:relative;
+}
+.hero-eyebrow{
+  font-family:var(--mono);font-size:11px;
+  color:var(--accent);letter-spacing:.2em;text-transform:uppercase;
+  border:1px solid var(--accent);
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 14px;border-radius:2px;
+  margin-bottom:32px;
+}
+.hero-eyebrow::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 1.5s ease infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+
+.hero-headline{
+  font-family:var(--display);
+  font-size:clamp(64px,9vw,124px);
+  line-height:.92;
+  letter-spacing:.01em;
+  color:var(--white);
+  margin-bottom:8px;
+}
+.hero-headline .hl{color:var(--accent)}
+.hero-headline .hl2{color:var(--gold)}
+
+.hero-sub{
+  font-size:18px;
+  color:var(--muted2);
+  max-width:580px;
+  margin:28px 0 44px;
+  line-height:1.7;
+}
+.hero-sub strong{color:var(--text)}
+
+/* Hero layout: left content + right buy box */
+.hero-grid{
+  display:grid;
+  grid-template-columns:1fr 380px;
+  gap:64px;
+  align-items:start;
+  padding-bottom:80px;
+}
+.hero-badges{
+  display:flex;gap:10px;flex-wrap:wrap;
+  margin-bottom:40px;
+}
+.badge{
+  font-family:var(--mono);font-size:10px;
+  background:var(--card);
+  border:1px solid var(--border2);
+  padding:6px 12px;border-radius:2px;
+  color:var(--muted2);
+  display:flex;align-items:center;gap:6px;
+}
+.badge .dot{width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0}
+
+/* ── Buy Box ──────────────────────────────────────── */
+.buy-box{
+  background:var(--card);
+  border:1px solid var(--border2);
+  border-top:3px solid var(--accent);
+  border-radius:8px;
+  padding:28px;
+  position:sticky;
+  top:80px;
+}
+.buy-box-label{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
+.price-row{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.price-main{font-family:var(--display);font-size:72px;color:var(--accent);line-height:1}
+.price-old{font-family:var(--mono);font-size:20px;color:var(--muted);text-decoration:line-through}
+.price-save{
+  background:var(--gold);color:#000;
+  font-family:var(--mono);font-size:10px;font-weight:500;
+  padding:3px 8px;border-radius:2px;
+}
+.buy-btn{
+  display:block;width:100%;
+  background:var(--accent);color:#000;
+  font-family:var(--body);font-weight:800;font-size:16px;
+  padding:18px;border-radius:4px;
+  border:none;cursor:pointer;
+  margin:20px 0 14px;
+  transition:all .2s;
+  text-align:center;
+  text-decoration:none;
+  letter-spacing:.01em;
+}
+.buy-btn:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,229,160,.35)}
+.buy-btn-sub{font-size:11px;color:var(--muted);text-align:center;margin-bottom:20px;font-family:var(--mono)}
+.buy-divider{height:1px;background:var(--border);margin:20px 0}
+.whats-inside-label{font-size:11px;color:var(--muted);font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+.include-row{
+  display:flex;align-items:flex-start;gap:10px;
+  margin-bottom:10px;font-size:13px;color:var(--text);
+}
+.include-row .check{
+  width:18px;height:18px;border-radius:3px;
+  background:rgba(0,229,160,.15);
+  border:1px solid rgba(0,229,160,.4);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+}
+.include-val{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.total-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 0;border-top:1px dashed var(--border2);margin-top:8px;
+}
+.total-label{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+.total-val{font-family:var(--mono);font-size:13px;color:var(--muted);text-decoration:line-through}
+.total-price{font-family:var(--display);font-size:28px;color:var(--accent)}
+.guarantee{
+  display:flex;gap:10px;align-items:flex-start;
+  background:rgba(255,209,102,.05);
+  border:1px solid rgba(255,209,102,.2);
+  border-radius:4px;padding:12px;margin-top:14px;
+}
+.guarantee-icon{font-size:22px;flex-shrink:0}
+.guarantee-text{font-size:11px;color:var(--muted2);line-height:1.6}
+.guarantee-text strong{color:var(--gold);font-size:12px}
+
+/* ── Countdown ────────────────────────────────────── */
+.countdown-bar{
+  background:rgba(255,77,77,.08);
+  border:1px solid rgba(255,77,77,.25);
+  border-radius:4px;padding:12px 16px;
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:16px;
+}
+.countdown-bar .cd-label{font-family:var(--mono);font-size:10px;color:#FF4D4D;text-transform:uppercase;letter-spacing:.1em}
+.cd-time{font-family:var(--mono);font-size:18px;font-weight:500;color:var(--white);letter-spacing:.05em}
+
+/* ── Section styles ───────────────────────────────── */
+.section{
+  max-width:1200px;
+  margin:0 auto;
+  padding:80px 48px;
+}
+.section-label{
+  font-family:var(--mono);font-size:11px;
+  color:var(--accent);letter-spacing:.2em;text-transform:uppercase;
+  margin-bottom:16px;display:block;
+}
+.section-title{
+  font-family:var(--display);
+  font-size:clamp(40px,5vw,72px);
+  line-height:.95;color:var(--white);
+  margin-bottom:16px;
+}
+.section-sub{font-size:17px;color:var(--muted2);max-width:600px;line-height:1.7}
+
+/* ── Problem section ──────────────────────────────── */
+.problem-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);border-radius:6px;overflow:hidden;
+  margin-top:48px;
+}
+.problem-card{
+  background:var(--card);padding:32px 28px;
+}
+.problem-num{
+  font-family:var(--display);font-size:56px;
+  color:var(--border2);line-height:1;margin-bottom:12px;
+}
+.problem-title{font-weight:700;font-size:15px;color:var(--text);margin-bottom:8px}
+.problem-body{font-size:13px;color:var(--muted2);line-height:1.7}
+
+/* ── Services section ─────────────────────────────── */
+.services-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+  margin-top:48px;
+}
+.service-card{
+  background:var(--card);
+  border:1px solid var(--border);border-radius:6px;
+  padding:28px;
+  position:relative;overflow:hidden;
+  transition:border-color .2s, transform .2s;
+}
+.service-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.service-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),transparent);
+}
+.service-num{
+  font-family:var(--mono);font-size:11px;color:var(--muted);
+  margin-bottom:20px;letter-spacing:.1em;
+}
+.service-name{font-family:var(--display);font-size:28px;color:var(--white);margin-bottom:12px;line-height:1}
+.service-desc{font-size:13px;color:var(--muted2);line-height:1.7;margin-bottom:20px}
+.service-meta{display:flex;flex-direction:column;gap:6px}
+.service-meta-row{
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--mono);font-size:11px;
+}
+.service-meta-key{color:var(--muted)}
+.service-meta-val{color:var(--accent)}
+
+/* ── Modules ──────────────────────────────────────── */
+.modules-list{margin-top:48px;display:flex;flex-direction:column;gap:1px}
+.module-row{
+  display:grid;grid-template-columns:80px 1fr auto;
+  gap:32px;align-items:center;
+  padding:24px 0;
+  border-bottom:1px solid var(--border);
+  cursor:pointer;
+  transition:all .15s;
+}
+.module-row:hover .module-title{color:var(--accent)}
+.module-num-big{
+  font-family:var(--display);font-size:52px;
+  color:var(--border2);line-height:1;
+  transition:color .2s;
+}
+.module-row:hover .module-num-big{color:var(--border2)}
+.module-title{font-size:17px;font-weight:700;color:var(--white);margin-bottom:4px;transition:color .2s}
+.module-sub{font-size:13px;color:var(--muted);line-height:1.5}
+.module-tag{
+  font-family:var(--mono);font-size:10px;
+  background:rgba(0,229,160,.1);color:var(--accent);
+  border:1px solid rgba(0,229,160,.25);
+  padding:4px 10px;border-radius:2px;white-space:nowrap;
+}
+
+/* ── Offer Stack ──────────────────────────────────── */
+.offer-bg{
+  background:var(--card);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.offer-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;
+  margin-top:40px;
+}
+.offer-card{
+  background:var(--card2);
+  border:1px solid var(--border);border-radius:6px;
+  padding:24px;
+  display:flex;gap:16px;
+  transition:border-color .2s;
+}
+.offer-card:hover{border-color:var(--border2)}
+.offer-card.main-product{
+  border-color:var(--accent);
+  background:rgba(0,229,160,.04);
+  grid-column:1/-1;
+}
+.offer-icon{
+  width:44px;height:44px;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0;
+}
+.offer-title{font-weight:700;font-size:15px;color:var(--white);margin-bottom:4px}
+.offer-desc{font-size:13px;color:var(--muted2);line-height:1.6}
+.offer-value{
+  margin-left:auto;font-family:var(--mono);
+  font-size:12px;color:var(--muted);
+  white-space:nowrap;align-self:flex-start;flex-shrink:0;
+}
+.offer-total-bar{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:20px 0;margin-top:8px;
+  border-top:1px dashed var(--border2);
+}
+.offer-total-label{font-family:var(--mono);font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+.offer-total-nums{display:flex;align-items:center;gap:16px}
+.offer-total-old{font-family:var(--mono);font-size:16px;color:var(--muted);text-decoration:line-through}
+.offer-total-new{font-family:var(--display);font-size:48px;color:var(--accent)}
+
+/* ── Social proof / Testimonials ──────────────────── */
+.testi-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+  margin-top:48px;
+}
+.testi-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:6px;padding:24px;
+  position:relative;
+}
+.testi-card::before{
+  content:'"';
+  font-family:var(--display);font-size:80px;
+  color:var(--border2);
+  position:absolute;top:-10px;left:20px;
+  line-height:1;
+}
+.testi-text{
+  font-size:14px;color:var(--text);line-height:1.7;
+  margin-bottom:20px;margin-top:24px;
+}
+.testi-text strong{color:var(--accent)}
+.testi-author{display:flex;gap:12px;align-items:center}
+.testi-avatar{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:14px;color:#000;flex-shrink:0;
+}
+.testi-name{font-weight:700;font-size:13px;color:var(--white)}
+.testi-detail{font-size:11px;color:var(--muted);font-family:var(--mono)}
+.stars{color:var(--gold);font-size:13px;margin-bottom:8px}
+
+/* ── Stats bar ────────────────────────────────────── */
+.stats-bar{
+  background:var(--card);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.stats-inner{
+  max-width:1200px;margin:0 auto;padding:48px;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--border);
+}
+.stat-item{background:var(--card);padding:32px 24px}
+.stat-num{font-family:var(--display);font-size:56px;color:var(--white);line-height:1;margin-bottom:4px}
+.stat-num .accent{color:var(--accent)}
+.stat-label{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+
+/* ── FAQ ──────────────────────────────────────────── */
+.faq-list{margin-top:48px}
+.faq-item{border-bottom:1px solid var(--border);padding:24px 0;cursor:pointer}
+.faq-q{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:16px;font-weight:600;color:var(--text);
+}
+.faq-q .faq-icon{
+  font-size:20px;color:var(--muted);transition:transform .3s;flex-shrink:0;margin-left:24px;
+}
+.faq-item.open .faq-icon{transform:rotate(45deg);color:var(--accent)}
+.faq-a{
+  font-size:14px;color:var(--muted2);line-height:1.8;
+  max-height:0;overflow:hidden;transition:max-height .3s ease, padding .3s;
+}
+.faq-item.open .faq-a{max-height:200px;padding-top:16px}
+
+/* ── CTA section ──────────────────────────────────── */
+.cta-section{
+  background:var(--card);
+  border-top:1px solid var(--border);
+}
+.cta-inner{
+  max-width:800px;margin:0 auto;
+  padding:100px 48px;text-align:center;
+}
+.cta-headline{
+  font-family:var(--display);
+  font-size:clamp(48px,7vw,96px);
+  line-height:.92;color:var(--white);
+  margin-bottom:24px;
+}
+.cta-headline .hl{color:var(--accent)}
+.cta-sub{font-size:17px;color:var(--muted2);max-width:500px;margin:0 auto 40px;line-height:1.7}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--accent);color:#000;
+  font-family:var(--body);font-weight:800;font-size:18px;
+  padding:22px 44px;border-radius:4px;
+  text-decoration:none;
+  transition:all .2s;
+  border:none;cursor:pointer;
+}
+.cta-btn:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,229,160,.4)}
+.cta-price-tag{
+  font-family:var(--mono);font-size:13px;
+  color:var(--muted);margin-top:16px;
+}
+.cta-price-tag strong{color:var(--text)}
+
+/* ── Footer ───────────────────────────────────────── */
+.footer{
+  border-top:1px solid var(--border);
+  padding:32px 48px;
+  display:flex;justify-content:space-between;align-items:center;
+  max-width:1200px;margin:0 auto;
+}
+.footer-logo{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.1em}
+.footer-links{display:flex;gap:24px;font-size:12px;color:var(--muted)}
+.footer-links a:hover{color:var(--accent)}
+
+/* ── Horizontal rule ──────────────────────────────── */
+.hr-accent{
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  margin:0;opacity:.4;
+}
+
+/* ── Animations ───────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+
+/* ── Number counter ───────────────────────────────── */
+.counter{display:inline}
+
+/* ── Responsive ───────────────────────────────────── */
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .buy-box{position:static}
+  .problem-grid,.services-grid,.testi-grid{grid-template-columns:1fr}
+  .offer-grid{grid-template-columns:1fr}
+  .offer-card.main-product{grid-column:auto}
+  .stats-inner{grid-template-columns:1fr 1fr}
+  .nav{padding:14px 24px}
+  .section,.hero{padding-left:24px;padding-right:24px}
+}
+@media(max-width:600px){
+  .hero-headline{font-size:56px}
+  .stats-inner{grid-template-columns:1fr}
+  .module-row{grid-template-columns:50px 1fr auto}
+}
+</style>
+</head>
+<body>
+
+<!-- Ticker -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="ticker">
+    <div class="ticker-item">⚡ ACTIVE BUYERS <span>2,847+</span></div>
+    <div class="ticker-item">✓ NO CODING REQUIRED <span>EVER</span></div>
+    <div class="ticker-item">⚡ FIRST CLIENT TARGET <span>14 DAYS</span></div>
+    <div class="ticker-item">✓ FREE TOOLS ONLY <span>$0 TO START</span></div>
+    <div class="ticker-item">⚡ INSTANT DOWNLOAD <span>LIFETIME ACCESS</span></div>
+    <div class="ticker-item">✓ BONUS VALUE <span>$208 INCLUDED</span></div>
+    <div class="ticker-item">⚡ YOUR PRICE <span>$27</span></div>
+    <div class="ticker-item">✓ 14-DAY ACTION GUARANTEE <span>INCLUDED</span></div>
+    <!-- duplicate for seamless loop -->
+    <div class="ticker-item">⚡ ACTIVE BUYERS <span>2,847+</span></div>
+    <div class="ticker-item">✓ NO CODING REQUIRED <span>EVER</span></div>
+    <div class="ticker-item">⚡ FIRST CLIENT TARGET <span>14 DAYS</span></div>
+    <div class="ticker-item">✓ FREE TOOLS ONLY <span>$0 TO START</span></div>
+    <div class="ticker-item">⚡ INSTANT DOWNLOAD <span>LIFETIME ACCESS</span></div>
+    <div class="ticker-item">✓ BONUS VALUE <span>$208 INCLUDED</span></div>
+    <div class="ticker-item">⚡ YOUR PRICE <span>$27</span></div>
+    <div class="ticker-item">✓ 14-DAY ACTION GUARANTEE <span>INCLUDED</span></div>
+  </div>
+</div>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-logo">⚡ AI MONEY BLUEPRINT</div>
+  <a href="#buy" class="nav-cta">Get Instant Access — $27</a>
+</nav>
+
+<!-- ── HERO ─────────────────────────────────────────── -->
+<div class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-eyebrow reveal">New system · 2024</div>
+
+      <h1 class="hero-headline reveal reveal-delay-1">
+        LAND YOUR<br>
+        FIRST <span class="hl">$500</span><br>
+        AI CLIENT<br>
+        IN <span class="hl2">14 DAYS</span>
+      </h1>
+
+      <p class="hero-sub reveal reveal-delay-2">
+        The exact 3-service system beginners use to find, pitch, and close paying AI clients —
+        <strong>without writing a single line of code, building an audience, or leaving your day job.</strong>
+      </p>
+
+      <div class="hero-badges reveal reveal-delay-3">
+        <div class="badge"><div class="dot"></div>90-Min Read</div>
+        <div class="badge"><div class="dot"></div>No Coding</div>
+        <div class="badge"><div class="dot"></div>No Audience</div>
+        <div class="badge"><div class="dot"></div>Free AI Tools Only</div>
